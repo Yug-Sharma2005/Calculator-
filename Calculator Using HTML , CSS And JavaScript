@@ -1,0 +1,170 @@
+HTML Code
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Calculator</h1>
+      <div class="child-1">
+        <button type="button" class="btn" id="C">C</button>
+        <input type="text" id="input">
+      </div>
+      <div class="child-2">
+        <div class="row-1">
+          <button type="button" class="btn button valbtn" id="seven">7</button>
+          <button type="button" class="btn button valbtn" id="8">8</button>
+          <button type="button" class="btn button valbtn" id="9">9</button>
+          <button type="button" class="btn valbtn" id="plus">+</button>
+        </div>
+        <div class="row-2">
+          <button type="button" class="btn button valbtn" id="4">4</button>
+          <button type="button" class="btn button valbtn" id="3">5</button>
+          <button type="button" class="btn button valbtn" id="six">6</button>
+          <button type="button" class="btn valbtn" id="minus">-</button>
+        </div>
+        <div class="row-3">
+          <button type="button" class="btn button valbtn" id="1">1</button>
+          <button type="button" class="btn button valbtn" id="2">2</button>
+          <button type="button" class="btn button valbtn" id="3">3</button>
+          <button type="button" class="btn valbtn" id="divide">/</button>
+        </div>
+        <div class="row-4">
+            <button type="button" class="btn button valbtn" id="0">0</button>
+            <button type="button" class="btn button valbtn" id="dot">.</button>
+            <button type="button" class="btn" id="equal" onclick="solve()">=</button>
+            <button type="button" class="btn valbtn" id="multiply">*</button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+CSS Code 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 660px;
+    background-color:aliceblue;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid black;
+    width: 350px;
+    padding: 20px 20px 9px;
+    height: 330px;
+    background-color: #9dd2ea;
+    box-shadow: 0px 4px #009de4, 0px 10px 15px rgba(0, 0, 0, 0.2);
+    background:linear-gradient(#9dd2ea, #8bceec);
+    border-radius: 30px;
+    border: transparent;
+}
+
+h1 {
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+#C {
+    background: #ff9fa8;
+    color: #fff;
+    box-shadow: 0px 4px #ff7c87;
+}
+
+#input {
+    height: 37px;
+    width: 170px;
+    border-radius: 3px;
+    background-color: #479f9f;
+    border: transparent;
+    color: white;
+    font-size: 15px;
+    box-shadow: 0 -5px 0.5px  #397f80;
+
+}
+
+.btn {
+    height: 40px;
+    width: 55px;
+    border-radius: 3px;
+    border: transparent;
+    font-size: 15px;
+}
+
+.row-1 , .row-2, .row-3 , .row-4 {
+    margin-top: 10px;
+}
+
+#plus , #minus , #divide , #multiply {
+    background-color: lightpink;
+    box-shadow: 0 5px lightslategray;
+}
+
+#equal {
+    background-color: yellow;
+    box-shadow: 0px 4px #9da853;
+}
+
+.button {
+    background-color: white;
+    box-shadow: 0 5px lightslategray;
+}
+
+JavaScript Code 
+const userInput = document.getElementById("input");
+const btn = document.querySelectorAll(".valbtn");
+const clear = document.querySelector("#C");
+const equal = document.querySelector("#equal");
+const plus = document.querySelector("#plus");
+let userval = userInput.value;
+console.log(btn);
+
+let arr = []
+var res;
+let sum;
+btn.forEach(function (b) {
+    b.addEventListener("click" , function() {
+        arr = [];
+        arr.push(b.textContent);
+        for(let i = 0; i < arr.length; i++) {
+            displayValue(arr.at(i))
+        }
+    })
+})
+
+function displayValue(element) {
+    userInput.value += element;
+
+}
+
+clear.addEventListener("click" , function() {
+    userInput.value = '';
+})
+
+function solve(){
+    try{
+        userInput.value = eval(userInput.value)
+        console.log(userInput.textContent)
+    } 
+    catch{
+        userInput.value = "Not Possible"
+    }
+}
+
+
